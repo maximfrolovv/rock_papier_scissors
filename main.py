@@ -1,3 +1,9 @@
+"""
+Maxim Frolov
+405
+le code si dessous fais un jeu de roche papier ciseaux avec un ordinateur animer
+"""
+
 import arcade
 import random
 
