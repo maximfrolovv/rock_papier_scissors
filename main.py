@@ -141,20 +141,20 @@ class GameView(arcade.View):
         computer = self.computer_choice
 
         if player == computer:
-            self.result_text = "Draw"
+            self.result_text = "Égalité"
             return
 
         if player == "rock" and computer == "scissors":
             self.result_text = "Le joueur gagne"
             self.player_score += 1
         elif player == "paper" and computer == "rock":
-            self.result_text = "Le joueur gagne la ronde!"
+            self.result_text = "Le joueur gagne"
             self.player_score += 1
         elif player == "scissors" and computer == "paper":
-            self.result_text = "Le joueur a gagner"
+            self.result_text = "Le joueur gagne"
             self.player_score += 1
         else:
-            self.result_text = "L'ordinateur a gagner"
+            self.result_text = "L'ordinateur gagne"
             self.computer_score += 1
 
         if self.player_score == 3 or self.computer_score == 3:
@@ -169,23 +169,32 @@ class GameView(arcade.View):
         self.draw_rectangle()
         self.players_list.draw()
 
-        arcade.draw_text("Rock, Paper, Scissors", 350, 640, arcade.color.WHITE, 50)
-        arcade.draw_text("Appuyer sur une image pour faire une attaque", 280, 550, arcade.color.WHITE, 30)
+        arcade.draw_text("Roche, Papier, Ciseaux", 350, 640, arcade.color.WHITE, 50)
+        arcade.draw_text("Appuyez sur une image pour faire une attaque", 280, 550, arcade.color.WHITE, 30)
 
-        arcade.draw_text(f"Pointage ordinateur : {self.computer_score}", 150, 50, arcade.color.WHITE, 18)
-        arcade.draw_text(f"Pointage joueur : {self.player_score}", 850, 50, arcade.color.WHITE, 18)
+        arcade.draw_text(f"Pointage de l'ordinateur : {self.computer_score}", 150, 50, arcade.color.WHITE, 18)
+        arcade.draw_text(f"Pointage du joueur : {self.player_score}", 850, 50, arcade.color.WHITE, 18)
 
-        if self.player_choice:
-            arcade.draw_text(f"Joueur: {self.player_choice}", 850, 350, arcade.color.YELLOW, 22)
-        if self.computer_choice:
-            arcade.draw_text(f"Ordinateur: {self.computer_choice}", 150, 350, arcade.color.YELLOW, 22)
+        if self.player_choice == "rock":
+            arcade.draw_text("Joueur: Roche", 850, 350, arcade.color.YELLOW, 22)
+        elif self.player_choice == "paper":
+            arcade.draw_text("Joueur: Papier", 850, 350, arcade.color.YELLOW, 22)
+        elif self.player_choice == "scissors":
+            arcade.draw_text("Joueur: Ciseaux", 850, 350, arcade.color.YELLOW, 22)
+
+        if self.computer_choice == "rock":
+            arcade.draw_text("Ordinateur: Roche", 150, 350, arcade.color.YELLOW, 22)
+        elif self.computer_choice == "paper":
+            arcade.draw_text("Ordinateur: Papier", 150, 350, arcade.color.YELLOW, 22)
+        elif self.computer_choice == "scissors":
+            arcade.draw_text("Ordinateur: Ciseaux", 150, 350, arcade.color.YELLOW, 22)
 
         arcade.draw_text(self.result_text, 450, 450, arcade.color.PINK, 30)
 
         if self.game_over:
             winner = "Le joueur" if self.player_score == 3 else "L'ordinateur"
             arcade.draw_text(f"{winner} a gagné la partie", 400, 300, arcade.color.RED, 30)
-            arcade.draw_text("Appuyez espace pour recommencer", 350, 250, arcade.color.WHITE, 22)
+            arcade.draw_text("Appuyez sur espace pour recommencer", 350, 250, arcade.color.WHITE, 22)
 
     def on_update(self, delta_time):
         if self.hide_timer > 0:
